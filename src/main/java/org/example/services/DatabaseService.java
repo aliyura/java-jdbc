@@ -40,13 +40,32 @@ public class DatabaseService {
         }
     }
 
-    public int updateRecord(){
-        // complete this
+    public int updateRecord(String name, int id){
+        try {
+            Connection connection = this.connect();
+            PreparedStatement preparedStatement = connection.prepareStatement("update test set name=? where id=? ");
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, id);
+            preparedStatement.execute();
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return -1;
+        }
         return 1;
     }
 
-    public int deleteRecord(){
-        //complete this
+    public int deleteRecord(int id){
+        try {
+            Connection connection = this.connect();
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from test where id=? ");
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return -1;
+        }
         return 1;
     }
 
